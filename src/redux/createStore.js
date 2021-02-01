@@ -4,8 +4,27 @@ export default function createStore(reducer, enhancer) {
   }
 
   let state = {
-    counter: {
-      number: 0
+    backlog: {
+      tasks: [
+        {
+          id: 1,
+          content: 'asdffsdfsfsfsdfs',
+          createdAt: 'Sep 14',
+          badge: 'Feature Request'
+        },
+        {
+          id: 2,
+          content: 'asdf',
+          createdAt: 'Sep 12',
+          badge: 'Feature Request'
+        },
+        {
+          id: 3,
+          content: 'asdf',
+          createdAt: 'Sep 11',
+          badge: 'Feature Request'
+        }
+      ]
     }
   };
 

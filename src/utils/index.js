@@ -1,6 +1,17 @@
 import applyDiff from './applyDiff';
 import registry from './registry';
-import { appSelector, listSelector } from './selectors';
+import {
+  appSelector,
+  listSelector,
+  kanbanSelector,
+  backlogBoardSelector,
+  badgeSelector,
+  contentSelector,
+  createdAtSelector,
+  cardListSelector,
+  cardSelector,
+  addButtonSelector
+} from './selectors';
 
 import {
   createTemplate,
@@ -19,5 +30,13 @@ export {
   getNewComponent,
   registry,
   appSelector,
-  listSelector
+  listSelector,
+  kanbanSelector,
+  backlogBoardSelector,
+  badgeSelector,
+  contentSelector,
+  createdAtSelector,
+  cardListSelector,
+  cardSelector,
+  addButtonSelector
 };

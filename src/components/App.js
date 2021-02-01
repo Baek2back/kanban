@@ -3,40 +3,24 @@ import {
   getNewComponent,
   applyCSS,
   appSelector,
-  listSelector,
-  getComponentTag,
+  kanbanSelector,
   getChildrenComponents
 } from '../utils';
 
-import List from './List';
+import Kanban from './Kanban';
 
 const css = /*css*/ `
   ${appSelector} button {
-    background: red;
+    
   }
 `;
 
 applyCSS(css);
 
-const handlingEvents = (targetElementRoot, dispatch) => {
-  const delegatedTarget = targetElementRoot.firstElementChild;
-  const someH = (e) => {
-    if (!e.target.matches(`${appSelector} button`)) return;
-    dispatch();
-  };
-  delegatedTarget.addEventListener('click', someH);
-};
-
-const App = ({ targetElement, state, actions }) => {
-  const todos = [
-    { id: 1, content: 'a' },
-    { id: 1, content: 'a' },
-    { id: 1, content: 'a' }
-  ];
+const App = ({ targetElement }) => {
   const html = /*html*/ `
     <div>
-      <button>${state.number}</button>
-      ${todos.map(() => getComponentTag('list')).join('')}
+      <section data-component="kanban"></section>
     </div>
   `;
 
@@ -45,11 +29,10 @@ const App = ({ targetElement, state, actions }) => {
   const newApp = getNewComponent(targetElement, template);
   getChildrenComponents({
     parentNode: newApp,
-    childSelector: listSelector,
-    componentFunc: List,
-    props: todos
+    childSelector: kanbanSelector,
+    componentFunc: Kanban,
+    props: [{}]
   });
-  handlingEvents(newApp, actions.increase);
   return newApp;
 };
 

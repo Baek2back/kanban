@@ -1,12 +1,16 @@
+import './index.css';
 import rootReducer from './modules';
 import { createStore, applyMiddleware, provide } from './redux';
 import { logger, thunk } from './middlewares';
 
 import { applyDiff, registry } from './utils';
 
-import AppContainer from './containers/AppContainer';
+import App from './components/App';
 
-registry.addToRegistry('app', AppContainer);
+import BacklogBoardContainer from './containers/BacklogBoardContainer';
+
+registry.addToRegistry('app', App);
+registry.addToRegistry('backlog-board', BacklogBoardContainer);
 
 const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 provide(store);
