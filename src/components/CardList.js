@@ -8,9 +8,9 @@ import {
 
 import Card from './Card';
 
-const CardList = ({ targetElement, tasks }) => {
+const CardList = ({ targetElement, category, tasks }) => {
   const html = /*html*/ `
-    <ul class="mt-2">
+    <ul class="mt-2" data-category=${category}>
       <li class="list-start py-0.5"></li>
       ${tasks.map(() => getComponentTag('card')).join('')}
     </ul>

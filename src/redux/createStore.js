@@ -5,23 +5,23 @@ export default function createStore(reducer, enhancer) {
 
   let state = {
     boards: {
-      types: ['backlog', 'inprogress', 'review', 'done'],
+      categories: ['backlog', 'inprogress', 'review', 'done'],
       backlog: {
         tasks: [
           {
-            id: 1,
+            id: 'abc',
             content: '가',
             createdAt: 'Sep 14',
             badge: 'Feature Request'
           },
           {
-            id: 2,
+            id: 'def',
             content: '나',
             createdAt: 'Sep 12',
             badge: 'Feature Request'
           },
           {
-            id: 3,
+            id: 'ghi',
             content: '다',
             createdAt: 'Sep 11',
             badge: 'Feature Request'
@@ -31,7 +31,7 @@ export default function createStore(reducer, enhancer) {
       inprogress: {
         tasks: [
           {
-            id: 4,
+            id: 'jkl',
             content: '라',
             createdAt: 'Sep 11',
             badge: 'Feature Request'
@@ -41,7 +41,7 @@ export default function createStore(reducer, enhancer) {
       review: {
         tasks: [
           {
-            id: 5,
+            id: 'mno',
             content: '마',
             createdAt: 'Sep 11',
             badge: 'Feature Request'
@@ -51,7 +51,7 @@ export default function createStore(reducer, enhancer) {
       done: {
         tasks: [
           {
-            id: 6,
+            id: 'pqr',
             content: '바',
             createdAt: 'Sep 12',
             badge: 'Feature Request'

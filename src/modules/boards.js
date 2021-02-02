@@ -3,20 +3,20 @@ import { createAction, handleActions } from '../redux';
 const INSERT_TASK = 'boards/INSERT_TASK';
 const ALLOCATE_TASKS = 'boards/ALLOCATE_TASKS';
 
-export const insertTask = createAction(INSERT_TASK, ({ type, task }) => ({
-  type,
+export const insertTask = createAction(INSERT_TASK, ({ category, task }) => ({
+  category,
   task
 }));
 export const allocateTasks = createAction(
   ALLOCATE_TASKS,
-  ({ type, tasks }) => ({
-    type,
+  ({ category, tasks }) => ({
+    category,
     tasks
   })
 );
 
 const initialState = {
-  type: ['backlog', 'inprogress', 'review', 'done'],
+  categories: ['backlog', 'inprogress', 'review', 'done'],
   backlog: {
     tasks: [
       {
@@ -67,20 +67,20 @@ const initialState = {
 const boards = handleActions(
   {
     [INSERT_TASK]: (state, action) => {
-      const { type, task } = action.payload;
+      const { category, task } = action.payload;
       return {
         ...state,
-        [type]: {
-          ...state.type,
-          tasks: [...state[type].tasks, task]
+        [category]: {
+          ...state.category,
+          tasks: [...state[category].tasks, task]
         }
       };
     },
     [ALLOCATE_TASKS]: (state, action) => {
-      const { type, tasks } = action.payload;
+      const { category, tasks } = action.payload;
       return {
         ...state,
-        [type]: { tasks }
+        [category]: { tasks }
       };
     }
   },

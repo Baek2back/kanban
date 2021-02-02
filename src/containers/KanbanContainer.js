@@ -3,11 +3,11 @@ import { connect, bindActionCreators } from '../redux';
 import { insertTask, allocateTasks } from '../modules/boards';
 
 const mapStateToProps = (state) => ({
-  types: state.boards.types,
-  tasksWithTypes: state.boards.types.map((type) => {
+  categories: state.boards.categories,
+  tasksWithTypes: state.boards.categories.map((category) => {
     return {
-      type,
-      tasks: state.boards[type].tasks
+      category,
+      tasks: state.boards[category].tasks
     };
   })
 });

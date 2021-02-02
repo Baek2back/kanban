@@ -3,7 +3,7 @@ import { createTemplate, getNewComponent } from '../utils';
 const CreatedAt = ({ targetElement, createdAt }) => {
   const html = /*html*/ `
     <div class="text-sm text-gray-600">
-      <time datetime="2019-09-14">${createdAt}</time>
+      <span>${createdAt}</span>
     </div>
   `;
   const template = createTemplate(html);
