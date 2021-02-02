@@ -7,10 +7,10 @@ import { applyDiff, registry } from './utils';
 
 import App from './components/App';
 
-import BacklogBoardContainer from './containers/BacklogBoardContainer';
+import KanbanContainer from './containers/KanbanContainer';
 
 registry.addToRegistry('app', App);
-registry.addToRegistry('backlog-board', BacklogBoardContainer);
+registry.addToRegistry('kanban', KanbanContainer);
 
 const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 provide(store);

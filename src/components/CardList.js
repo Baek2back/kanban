@@ -8,18 +8,17 @@ import {
 
 import Card from './Card';
 
-const CardList = ({ targetElement, tasks, insert, allocate }) => {
+const CardList = ({ targetElement, tasks }) => {
   const html = /*html*/ `
     <ul class="mt-2">
+      <li class="list-start py-0.5"></li>
       ${tasks.map(() => getComponentTag('card')).join('')}
     </ul>
   `;
 
   const template = createTemplate(html);
   const newCardList = getNewComponent(targetElement, template);
-  newCardList.addEventListener('click', () => {
-    insert({ id: 4, content: 'ab' });
-  });
+
   getChildrenComponents({
     parentNode: newCardList,
     childSelector: cardSelector,

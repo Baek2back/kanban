@@ -13,14 +13,12 @@ import Badge from './Badge';
 
 const Card = ({ targetElement, id, content, createdAt, badge }) => {
   const html = /*html*/ `
-    <li class="mt-3" id=${id}>
-      <a href="#" class="block p-5 bg-white rounded-md shadow">
-        <section data-component="content"></section>
-        <div class="flex justify-between items-baseline">
-          <section data-component="created-at"></section>
-          <section data-component="badge"></section>
-        </div>
-      </a>
+    <li class="mt-3 block p-5 bg-white rounded-md shadow" id=${id}>
+      <section data-component="content"></section>
+      <div class="flex justify-between items-baseline">
+        <section data-component="created-at"></section>
+        <section data-component="badge"></section>
+      </div>
     </li>
   `;
 

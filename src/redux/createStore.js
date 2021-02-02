@@ -4,27 +4,60 @@ export default function createStore(reducer, enhancer) {
   }
 
   let state = {
-    backlog: {
-      tasks: [
-        {
-          id: 1,
-          content: 'asdffsdfsfsfsdfs',
-          createdAt: 'Sep 14',
-          badge: 'Feature Request'
-        },
-        {
-          id: 2,
-          content: 'asdf',
-          createdAt: 'Sep 12',
-          badge: 'Feature Request'
-        },
-        {
-          id: 3,
-          content: 'asdf',
-          createdAt: 'Sep 11',
-          badge: 'Feature Request'
-        }
-      ]
+    boards: {
+      types: ['backlog', 'inprogress', 'review', 'done'],
+      backlog: {
+        tasks: [
+          {
+            id: 1,
+            content: '가',
+            createdAt: 'Sep 14',
+            badge: 'Feature Request'
+          },
+          {
+            id: 2,
+            content: '나',
+            createdAt: 'Sep 12',
+            badge: 'Feature Request'
+          },
+          {
+            id: 3,
+            content: '다',
+            createdAt: 'Sep 11',
+            badge: 'Feature Request'
+          }
+        ]
+      },
+      inprogress: {
+        tasks: [
+          {
+            id: 4,
+            content: '라',
+            createdAt: 'Sep 11',
+            badge: 'Feature Request'
+          }
+        ]
+      },
+      review: {
+        tasks: [
+          {
+            id: 5,
+            content: '마',
+            createdAt: 'Sep 11',
+            badge: 'Feature Request'
+          }
+        ]
+      },
+      done: {
+        tasks: [
+          {
+            id: 6,
+            content: '바',
+            createdAt: 'Sep 12',
+            badge: 'Feature Request'
+          }
+        ]
+      }
     }
   };
 

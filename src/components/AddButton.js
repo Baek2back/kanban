@@ -1,19 +1,24 @@
 import { createTemplate, getNewComponent } from '../utils';
 
-const handleEvents = (component, dispatch) => {
+const handleEvents = (component, insertTask, allocateTasks, { type, task }) => {
   const componentRoot = component.firstElementChild;
   componentRoot.addEventListener('click', () => {
-    dispatch({ id: 123, content: '123n1lk23nl1' });
+    console.log(type);
+    // allocateTasks({ type, tasks: [] });
+    insertTask({ type, task });
   });
 };
 
-const AddButton = ({ targetElement, insert }) => {
+const AddButton = ({ targetElement, type, insertTask, allocateTasks }) => {
   const html = /*html*/ `
     <span class="px-2 py-1 leading-tight inline-flex items-center bg-black-100 rounded">+</span>
   `;
   const template = createTemplate(html);
   const newAddButton = getNewComponent(targetElement, template);
-  handleEvents(newAddButton, insert);
+  handleEvents(newAddButton, insertTask, allocateTasks, {
+    type,
+    task: { id: 1, content: '123' }
+  });
   return newAddButton;
 };
 

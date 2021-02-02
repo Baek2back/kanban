@@ -10,7 +10,9 @@ import {
   createdAtSelector,
   cardListSelector,
   cardSelector,
-  addButtonSelector
+  addButtonSelector,
+  boardSelector,
+  hoverStoreSelector
 } from './selectors';
 
 import {
@@ -38,5 +40,7 @@ export {
   createdAtSelector,
   cardListSelector,
   cardSelector,
-  addButtonSelector
+  boardSelector,
+  addButtonSelector,
+  hoverStoreSelector
 };

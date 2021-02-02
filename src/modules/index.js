@@ -1,8 +1,8 @@
 import { combineReducers } from '../redux';
-import backlog from './backlog';
+import boards from './boards';
 
 const rootReducer = combineReducers({
-  backlog
+  boards
 });
 
 export default rootReducer;

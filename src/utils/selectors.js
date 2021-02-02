@@ -13,3 +13,5 @@ export const backlogBoardSelector = dataAttrSelector(
   'backlog-board'
 );
 export const addButtonSelector = dataAttrSelector('component', 'add-button');
+export const boardSelector = dataAttrSelector('component', 'board');
+export const hoverStoreSelector = dataAttrSelector('component', 'hover-store');

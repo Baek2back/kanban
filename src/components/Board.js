@@ -8,30 +8,28 @@ import {
 import CardList from './CardList';
 import AddButton from './AddButton';
 
-const BacklogBoard = ({ targetElement, state, actions }) => {
-  const { insert, allocate } = actions;
+const Board = ({ targetElement, type, tasks, insertTask, allocateTasks }) => {
   const html = /*html*/ `
     <div class="ml-3 flex-shrink-0 p-3 w-80 bg-gray-100 rounded-md">
-      <h3 class="text-sm font-medium text-gray-900">Backlog
-        <section data-component="add-button"></section>
-      </h3>
+      <h3 class="text-sm font-medium text-gray-900">${type}</h3>
+      <section data-component="add-button"></section>
       <section data-component="card-list"></section>
     </div>
   `;
   const template = createTemplate(html);
-  const newBacklogBoard = getNewComponent(targetElement, template);
+  const newBoard = getNewComponent(targetElement, template);
   getChildrenComponents({
-    parentNode: newBacklogBoard,
+    parentNode: newBoard,
     childSelector: cardListSelector,
     componentFunc: CardList,
-    props: [{ tasks: state.tasks, insert, allocate }]
+    props: [{ type, tasks }]
   });
   getChildrenComponents({
-    parentNode: newBacklogBoard,
+    parentNode: newBoard,
     childSelector: addButtonSelector,
     componentFunc: AddButton,
-    props: [{ insert }]
+    props: [{ type, insertTask, allocateTasks }]
   });
-  return newBacklogBoard;
+  return newBoard;
 };
-export default BacklogBoard;
+export default Board;
