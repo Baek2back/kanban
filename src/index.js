@@ -3,6 +3,7 @@ import rootReducer from './modules';
 import { createStore, applyMiddleware, provide } from './redux';
 import { logger, thunk } from './middlewares';
 import { getBoards } from './modules/boards';
+import { setColor } from './modules/color';
 import { applyDiff, registry } from './utils';
 
 import App from './components/App';

@@ -1,23 +1,8 @@
-import {
-  createTemplate,
-  getNewComponent,
-  applyCSS,
-  appSelector
-} from '../utils';
-
-const css = /*css*/ `
-  ${appSelector} button {
-    
-  }
-`;
-
-applyCSS(css);
+import { createTemplate, getNewComponent } from '../utils';
 
 const App = ({ targetElement }) => {
   const html = /*html*/ `
-    <div>
-      <section data-component="kanban" class="p-3 flex justify-center"></section>
-    </div>
+    <section data-component="kanban"></section>
   `;
 
   const template = createTemplate(html);

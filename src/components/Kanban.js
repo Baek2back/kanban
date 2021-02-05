@@ -13,6 +13,7 @@ import _ from 'lodash';
 import ModalForm from './ModalForm';
 import Board from './Board';
 import HoverStore from './HoverStore';
+import Header from './Header';
 
 const handlingEvents = (targetElement, dispatch) => {
   let element, ghostNode;
@@ -20,7 +21,7 @@ const handlingEvents = (targetElement, dispatch) => {
   let halfOfghostWidth, halfOfghostHeight;
   let prevCategory, nextCategory;
 
-  const container = targetElement.firstElementChild;
+  const container = targetElement.firstElementChild.nextElementSibling;
   const hoverStore = container.querySelector(`${hoverStoreSelector} ul`);
 
   container.addEventListener('mousedown', cardPressed, { passive: true });
@@ -144,11 +145,25 @@ const handlingEvents = (targetElement, dispatch) => {
 };
 
 const Kanban = ({ targetElement, state, actions }) => {
-  const { categories, tasksWithTypes, modalStatus } = state;
-  const { insertTask, allocateTasks, removeTask, toggleModalVisible } = actions;
+  const {
+    categories,
+    tasksWithTypes,
+    modalStatus,
+    currentColor,
+    colorVisible
+  } = state;
+  const {
+    insertTask,
+    allocateTasks,
+    removeTask,
+    toggleModalVisible,
+    setColor,
+    setVisible
+  } = actions;
 
   const html = /*html*/ `
-    <main class="flex justify-center">
+    <header data-component="header"></header>
+    <main class="flex justify-center p-5 ${currentColor}">
       <section data-component="modal-form"></section>
       ${categories.map(() => getComponentTag('board')).join('')}
       <section data-component="hover-store"></section>
@@ -156,6 +171,13 @@ const Kanban = ({ targetElement, state, actions }) => {
   `;
   const template = createTemplate(html);
   const newKanban = getNewComponent(targetElement, template);
+
+  getChildrenComponents({
+    parentNode: newKanban,
+    childSelector: `[data-component="header"]`,
+    componentFunc: Header,
+    props: [{ setColor, setVisible, colorVisible }]
+  });
 
   getChildrenComponents({
     parentNode: newKanban,
