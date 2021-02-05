@@ -7,10 +7,18 @@ import {
   toggleModalVisible
 } from '../modules/boards';
 
-import { setColor, setVisible } from '../modules/color';
+import { setColor, setVisible as setColorVisible } from '../modules/color';
+import {
+  setVisible as setImageVisible,
+  getImages,
+  setBackgroundImage
+} from '../modules/image';
 
 const mapStateToProps = (state) => ({
+  backgroundImage: state.image.backgroundImage,
+  imageData: state.image.imageData,
   colorVisible: state.color.visible,
+  imageVisible: state.image.visible,
   currentColor: state.color.currentColor,
   modalStatus: state.boards.modal,
   categories: state.boards.categories,
@@ -29,7 +37,10 @@ const mapDispatchToProps = (dispatch) =>
       removeTask,
       toggleModalVisible,
       setColor,
-      setVisible
+      setColorVisible,
+      setImageVisible,
+      getImages,
+      setBackgroundImage
     },
     dispatch
   );
