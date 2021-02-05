@@ -7,7 +7,11 @@ import {
   toggleModalVisible
 } from '../modules/boards';
 
+import { setColor, setVisible } from '../modules/color';
+
 const mapStateToProps = (state) => ({
+  colorVisible: state.color.visible,
+  currentColor: state.color.currentColor,
   modalStatus: state.boards.modal,
   categories: state.boards.categories,
   tasksWithTypes: state.boards.categories.map((category) => {
@@ -19,7 +23,14 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
-    { insertTask, allocateTasks, removeTask, toggleModalVisible },
+    {
+      insertTask,
+      allocateTasks,
+      removeTask,
+      toggleModalVisible,
+      setColor,
+      setVisible
+    },
     dispatch
   );
 
