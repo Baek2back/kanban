@@ -1,16 +1,34 @@
-import { createTemplate, getNewComponent } from '../utils';
+import {
+  createTemplate,
+  getNewComponent,
+  getChildrenComponents
+} from '../utils';
+import ImageViewer from './ImageViewer';
 
-const handlingEvents = (targetElement, setColor, setVisible) => {
+const handlingEvents = (
+  targetElement,
+  setColor,
+  setColorVisible,
+  setImageVisible
+) => {
   const container = targetElement;
 
   container.addEventListener('click', (event) => {
     if (!event.target.matches('button')) return;
+    if (event.target.matches('.bg-Btn')) {
+      setImageVisible({ visible: true });
+      return;
+    }
     if (event.target.matches('.bgc-Btn')) {
-      setVisible({ visible: true });
+      setColorVisible({ visible: true });
+      return;
+    }
+    if ([...event.target.classList].includes('x-button-image')) {
+      setImageVisible({ visible: false });
       return;
     }
     if ([...event.target.classList].includes('x-button')) {
-      setVisible({ visible: false });
+      setColorVisible({ visible: false });
     } else {
       setColor({
         color: [...event.target.classList].find((node) => node.includes('bg-'))
@@ -19,7 +37,23 @@ const handlingEvents = (targetElement, setColor, setVisible) => {
   });
 };
 
-const Header = ({ targetElement, setColor, setVisible, colorVisible }) => {
+let init = false;
+
+const Header = ({
+  targetElement,
+  setColor,
+  setColorVisible,
+  colorVisible,
+  imageVisible,
+  setImageVisible,
+  getImages,
+  imageData,
+  setBackgroundImage
+}) => {
+  if (!init) {
+    getImages();
+    init = true;
+  }
   const html = /*html*/ `
   <header class="text-gray-100 bg-gray-900 body-font shadow w-full">
   <div class="lg:w-full flex flex-wrap p-5 flex-col md:flex-row justify-between m-0 w-full">
@@ -67,10 +101,17 @@ const Header = ({ targetElement, setColor, setVisible, colorVisible }) => {
     </div>
   </div>
 </div>
+<section data-component="image-viewer"></section>
   `;
   const template = createTemplate(html);
   const newHeader = getNewComponent(targetElement, template);
-  handlingEvents(newHeader, setColor, setVisible);
+  getChildrenComponents({
+    parentNode: newHeader,
+    childSelector: '[data-component="image-viewer"]',
+    componentFunc: ImageViewer,
+    props: [{ imageVisible, imageData, setBackgroundImage, getImages }]
+  });
+  handlingEvents(newHeader, setColor, setColorVisible, setImageVisible);
   return newHeader;
 };
 export default Header;

@@ -150,20 +150,28 @@ const Kanban = ({ targetElement, state, actions }) => {
     tasksWithTypes,
     modalStatus,
     currentColor,
-    colorVisible
+    colorVisible,
+    imageVisible,
+    imageData,
+    backgroundImage
   } = state;
   const {
     insertTask,
     allocateTasks,
     removeTask,
     toggleModalVisible,
+    getImages,
     setColor,
-    setVisible
+    setColorVisible,
+    setImageVisible,
+    setBackgroundImage
   } = actions;
-
+  const style = backgroundImage
+    ? `"background: no-repeat center/100% url('${backgroundImage}');"`
+    : '';
   const html = /*html*/ `
     <header data-component="header"></header>
-    <main class="flex justify-center p-5 ${currentColor}">
+    <main class="flex justify-center p-5 h-screen ${currentColor}" style=${style}>
       <section data-component="modal-form"></section>
       ${categories.map(() => getComponentTag('board')).join('')}
       <section data-component="hover-store"></section>
@@ -176,7 +184,18 @@ const Kanban = ({ targetElement, state, actions }) => {
     parentNode: newKanban,
     childSelector: `[data-component="header"]`,
     componentFunc: Header,
-    props: [{ setColor, setVisible, colorVisible }]
+    props: [
+      {
+        setColor,
+        setColorVisible,
+        colorVisible,
+        setImageVisible,
+        imageVisible,
+        getImages,
+        imageData,
+        setBackgroundImage
+      }
+    ]
   });
 
   getChildrenComponents({
