@@ -88,6 +88,7 @@ const handlingEvents = (targetElement, dispatch) => {
 
   function cardReleased() {
     ghostNode.remove();
+    element.style.opacity = 1;
     container.removeEventListener('mousemove', throttledCardMoved);
     container.removeEventListener('mouseup', cardReleased);
     container.removeEventListener('mouseleave', cardReleased);
@@ -139,7 +140,6 @@ const handlingEvents = (targetElement, dispatch) => {
 
     prevCategory = null;
     nextCategory = null;
-    element.style.opacity = 1;
   }
 };
 
