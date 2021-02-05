@@ -7,6 +7,10 @@ import {
   boardSelector,
   hoverStoreSelector
 } from '../utils';
+
+import _ from 'lodash';
+
+import ModalForm from './ModalForm';
 import Board from './Board';
 import HoverStore from './HoverStore';
 
@@ -20,6 +24,10 @@ const handlingEvents = (targetElement, dispatch) => {
   const hoverStore = container.querySelector(`${hoverStoreSelector} ul`);
 
   container.addEventListener('mousedown', cardPressed, { passive: true });
+
+  const throttledCardMoved = (function (cardMoved) {
+    return _.throttle(cardMoved, 25);
+  })(cardMoved);
 
   function cardPressed(event) {
     element = event.target.closest(`${cardSelector}`);
@@ -37,7 +45,9 @@ const handlingEvents = (targetElement, dispatch) => {
     halfOfghostWidth = width / 2;
     halfOfghostHeight = height / 2;
 
-    container.addEventListener('mousemove', cardMoved, { passive: true });
+    container.addEventListener('mousemove', throttledCardMoved, {
+      passive: true
+    });
     container.addEventListener('mouseup', cardReleased, {
       passive: true
     });
@@ -78,13 +88,13 @@ const handlingEvents = (targetElement, dispatch) => {
 
   function cardReleased() {
     ghostNode.remove();
-    element.style.opacity = 1;
-    container.removeEventListener('mousemove', cardMoved);
+    container.removeEventListener('mousemove', throttledCardMoved);
     container.removeEventListener('mouseup', cardReleased);
     container.removeEventListener('mouseleave', cardReleased);
 
     const prevUl = container.querySelector(`[data-category=${prevCategory}]`);
     const nextUl = container.querySelector(`[data-category=${nextCategory}]`);
+    if (!(prevUl && nextUl)) return;
 
     const prevLis = [...prevUl.querySelectorAll('[data-id]')];
     const nextLis = [...nextUl.querySelectorAll('[data-id]')];
@@ -96,11 +106,11 @@ const handlingEvents = (targetElement, dispatch) => {
             ...li.innerText.replace(/(\n\n)|(\n)/g, ',').split(',')
           ])
           .map((task) => {
-            const [id, content, createdAt, badge] = task;
+            const [id, content, dueDate, badge] = task;
             return {
               id,
               content,
-              createdAt,
+              dueDate,
               badge
             };
           })
@@ -112,29 +122,34 @@ const handlingEvents = (targetElement, dispatch) => {
             ...li.innerText.replace(/(\n\n)|(\n)/g, ',').split(',')
           ])
           .map((task) => {
-            const [id, content, createdAt, badge] = task;
+            const [id, content, dueDate, badge] = task;
             return {
               id,
               content,
-              createdAt,
+              dueDate,
               badge
             };
           })
       : [];
 
-    dispatch({ category: prevCategory, tasks: prevTasks });
-    dispatch({ category: nextCategory, tasks: nextTasks });
+    dispatch({
+      categories: [prevCategory, nextCategory],
+      tasks: [prevTasks, nextTasks]
+    });
 
     prevCategory = null;
     nextCategory = null;
+    element.style.opacity = 1;
   }
 };
 
 const Kanban = ({ targetElement, state, actions }) => {
-  const { categories, tasksWithTypes } = state;
-  const { insertTask, allocateTasks } = actions;
+  const { categories, tasksWithTypes, modalStatus } = state;
+  const { insertTask, allocateTasks, removeTask, toggleModalVisible } = actions;
+
   const html = /*html*/ `
     <main class="flex justify-center">
+      <section data-component="modal-form"></section>
       ${categories.map(() => getComponentTag('board')).join('')}
       <section data-component="hover-store"></section>
     </main>
@@ -144,12 +159,20 @@ const Kanban = ({ targetElement, state, actions }) => {
 
   getChildrenComponents({
     parentNode: newKanban,
+    childSelector: `[data-component="modal-form"]`,
+    componentFunc: ModalForm,
+    props: [{ ...modalStatus, toggleModalVisible, insertTask }]
+  });
+
+  getChildrenComponents({
+    parentNode: newKanban,
     childSelector: boardSelector,
     componentFunc: Board,
     props: tasksWithTypes.map((tasksWithType) => ({
       ...tasksWithType,
       insertTask,
-      allocateTasks
+      removeTask,
+      toggleModalVisible
     }))
   });
 

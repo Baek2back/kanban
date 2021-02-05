@@ -3,63 +3,7 @@ export default function createStore(reducer, enhancer) {
     return enhancer(createStore)(reducer);
   }
 
-  let state = {
-    boards: {
-      categories: ['backlog', 'inprogress', 'review', 'done'],
-      backlog: {
-        tasks: [
-          {
-            id: 'abc',
-            content: '가',
-            createdAt: 'Sep 14',
-            badge: 'Feature Request'
-          },
-          {
-            id: 'def',
-            content: '나',
-            createdAt: 'Sep 12',
-            badge: 'Feature Request'
-          },
-          {
-            id: 'ghi',
-            content: '다',
-            createdAt: 'Sep 11',
-            badge: 'Feature Request'
-          }
-        ]
-      },
-      inprogress: {
-        tasks: [
-          {
-            id: 'jkl',
-            content: '라',
-            createdAt: 'Sep 11',
-            badge: 'Feature Request'
-          }
-        ]
-      },
-      review: {
-        tasks: [
-          {
-            id: 'mno',
-            content: '마',
-            createdAt: 'Sep 11',
-            badge: 'Feature Request'
-          }
-        ]
-      },
-      done: {
-        tasks: [
-          {
-            id: 'pqr',
-            content: '바',
-            createdAt: 'Sep 12',
-            badge: 'Feature Request'
-          }
-        ]
-      }
-    }
-  };
+  let state;
 
   let listeners = [];
 

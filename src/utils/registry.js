@@ -5,7 +5,6 @@ const renderWrapper = (component) => {
     const element = component({ targetElement });
 
     const childComponents = element.querySelectorAll('[data-component]');
-
     [...childComponents].forEach((target) => {
       const name = target.dataset.component;
       const child = registry[name];

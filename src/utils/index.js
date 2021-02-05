@@ -1,5 +1,6 @@
 import applyDiff from './applyDiff';
 import registry from './registry';
+import uuid from './uuid';
 import {
   appSelector,
   listSelector,
@@ -31,6 +32,7 @@ export {
   getChildrenComponents,
   getNewComponent,
   registry,
+  uuid,
   appSelector,
   listSelector,
   kanbanSelector,

@@ -1,8 +1,14 @@
 import Kanban from '../components/Kanban';
 import { connect, bindActionCreators } from '../redux';
-import { insertTask, allocateTasks } from '../modules/boards';
+import {
+  insertTask,
+  allocateTasks,
+  removeTask,
+  toggleModalVisible
+} from '../modules/boards';
 
 const mapStateToProps = (state) => ({
+  modalStatus: state.boards.modal,
   categories: state.boards.categories,
   tasksWithTypes: state.boards.categories.map((category) => {
     return {
@@ -12,6 +18,9 @@ const mapStateToProps = (state) => ({
   })
 });
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ insertTask, allocateTasks }, dispatch);
+  bindActionCreators(
+    { insertTask, allocateTasks, removeTask, toggleModalVisible },
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Kanban);

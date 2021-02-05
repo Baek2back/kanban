@@ -2,7 +2,7 @@ import './index.css';
 import rootReducer from './modules';
 import { createStore, applyMiddleware, provide } from './redux';
 import { logger, thunk } from './middlewares';
-
+import { getBoards } from './modules/boards';
 import { applyDiff, registry } from './utils';
 
 import App from './components/App';
@@ -15,8 +15,12 @@ registry.addToRegistry('kanban', KanbanContainer);
 const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 provide(store);
 
+((dispatch) => {
+  getBoards()(dispatch);
+})(store.dispatch);
+
 const render = () => {
-  window.requestIdleCallback(() => {
+  window.requestAnimationFrame(() => {
     const main = document.getElementById('root');
     const newMain = registry.renderRoot({ targetElement: main });
     applyDiff(document.body, main, newMain);
@@ -24,5 +28,4 @@ const render = () => {
 };
 
 store.subscribe(render);
-
 render();

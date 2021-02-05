@@ -50,7 +50,6 @@ function reduceReducers(...args) {
         throw new TypeError(
           `An undefined reducer was passed in at index ${index}`
         );
-
       return reducer(newState, value, ...args);
     }, newState);
   };

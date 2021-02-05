@@ -1,0 +1,61 @@
+{
+  "boards": {
+    "backlog": {
+      "tasks": []
+    },
+    "inprogress": {
+      "tasks": [
+        {
+          "id": "70d66629-0c82-4724-8a24-01363501919b",
+          "content": "안녕",
+          "dueDate": "Feb 03",
+          "badge": "bug"
+        }
+      ]
+    },
+    "review": {
+      "tasks": [
+        {
+          "id": "bb728e2e-b2f3-4642-bdba-15a2bc03c904",
+          "content": "asdad",
+          "dueDate": "Feb 12",
+          "badge": "documentation"
+        },
+        {
+          "id": "xyz",
+          "content": "사",
+          "dueDate": "Feb 01",
+          "badge": "question"
+        },
+        {
+          "id": "mno",
+          "content": "마",
+          "dueDate": "Jan 30",
+          "badge": "good-first-issue"
+        },
+        {
+          "id": "abc",
+          "content": "가",
+          "dueDate": "Jan 03",
+          "badge": "duplicate"
+        },
+        {
+          "id": "5ab9d932-e437-42b0-99fc-aef8dc56b568",
+          "content": "하이",
+          "dueDate": "2021-02-06",
+          "badge": "bug"
+        }
+      ]
+    },
+    "done": {
+      "tasks": [
+        {
+          "id": "def",
+          "content": "나",
+          "dueDate": "Jan 04",
+          "badge": "bug"
+        }
+      ]
+    }
+  }
+}
